@@ -1,0 +1,401 @@
+/*公用部分*/
+*{margin: 0;padding: 0;}
+ul,ol{text-decoration: none;}
+li{list-style: none;}
+a{text-decoration: none;}
+button{cursor: pointer;}
+body{
+	background-image: url(../img/ts.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+img {
+	vertical-align: top;
+}
+/*弹出层*/
+.updiv{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.6);
+}
+.upcontent{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -210px 0 0 -240px;
+	width: 460px;
+	height: 400px;
+	background-size: 100% 100%;
+	background-image: url(../img/back24.jpg);
+	border-radius: 10px;
+	padding: 30px;
+	color: black;
+	font-weight: bold;
+}
+.form{
+	margin-top: 50px;
+	position: relative;
+}
+.upcontent input{
+    width: 100%;
+    height: 48px;
+    border: 1px solid black;
+    border-radius: 5px;
+    outline: none;
+    background: none;
+    margin-bottom: 30px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.upcontent button{
+	width: 140px;
+	height: 40px;
+	position: absolute;
+	top: 260px;
+	left: 160px;
+	border-radius: 10px;
+	outline: none;
+	border: none;
+	background-color: yellow;
+}
+/*关掉弹出层*/
+#close{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+/*头部*/
+.header{
+	width: 1280px;
+	margin: 0 auto;
+	height: 100px;
+	cursor: pointer;
+	position: relative;
+	background-color: rgb(255, 255, 255);
+}
+/*logo*/
+.logo{
+	float: left;
+	width: 480px;
+}
+.logoOne{
+	width: 300px;
+	height: 89px;
+	opacity: 0.8;
+	float: left;
+}
+.logoTwo{
+	float: left;
+	margin-top: 50px;
+	width: 150px;
+	height: 44px;
+}
+/*导航条*/
+.navtop{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.navtop li{
+	float: left;
+	color: #EA548E;
+	margin-right: 20px;
+}
+#callPic{
+	position: absolute;
+	right: 0;
+	top: 35px;
+	margin-right: 20px;
+	text-align: center;
+	font-size: 13px;
+	color: darkgreen;
+	background-color: white;
+	border-radius: 10px 1px 10px 1px;
+	border: 2px solid #006e96;
+	padding: 10px;
+	display: none;
+	z-index: 2;
+}
+#callPic span img{
+	width: 40px;
+	height: 30px;
+}
+.navbtm{
+	float: left;
+	margin-top: 70px;
+	margin-left: 40px;
+}
+.navbtm ul li{
+	width:120px;
+	height:30px;
+	float:left;
+	position:relative;
+	text-align: center;
+}
+.navbtm ul ul{ 
+	position:absolute;
+	left:0;
+	top:20px;
+	padding-top: 10px;
+	display:none;
+	color: #fff;
+	border: 1px solid #AAAAAA;
+	border-top: 0;
+	text-shadow: 2px 2px 3px #000;
+	background-color: rgba(0,0,0,0.4);
+	text-align: center;
+	list-style-type:disc;
+	z-index: 5;
+}
+.navbtm ul ul li{
+	border-bottom: 1px white dashed;
+	padding: 5px 0 5px 0;
+}
+.navbtm ul ul li:hover{
+	color: yellow;
+	text-shadow: 1px 1px 20px #8F7;
+}
+.content{
+	width: 1260px;
+	margin: 0 auto;
+	color: black;
+	margin-top: 30px;
+	padding: 10px;
+	overflow: hidden;
+}
+.oneline{
+	overflow: hidden;
+}
+/*新闻和公告*/
+.news{
+	float: left;
+    width: 620px;
+    height: 520px;
+    border:1px solid white;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+    position: relative;
+}
+.more img{
+	width: 26px;
+	height: 26px;
+}
+.more{
+	position: absolute;
+	right: 2px;
+	top: 8px;
+	cursor: pointer;
+	width: 40px;
+	height: 20px;
+	text-align: center;
+	border-radius: 5px;
+}
+.newst{
+	margin-bottom: 15px;
+}
+.newst span{
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    border: 1px solid #4B80AC;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+.newst span.current{
+    background-color: #4B80AC;
+}
+.newsb ul{
+	width: 100%;
+	height: 350px;
+	display: none;
+}
+.newsb ul.show{
+	display: block;
+}
+.newsb ul li{
+	padding: 8px;
+	margin-bottom: 12px;
+	border-bottom: 1px dashed black;
+	cursor: pointer;
+}
+.newsb ul li:hover,.more:hover{
+	color: red;
+}
+.newsb ul li span{
+	display: inline-block;
+	float: right;
+}
+.newsb ul li span.arrow{
+	float: left;
+	margin-right: 4px;
+}
+.w-slider{
+	float: left;
+    width: 520px;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px 30px;
+    padding-top: 60px;
+    border: 1px solid black;
+}
+/*显示滚动的盒子*/
+.slider{
+	position: relative;
+    width: 520px;
+    height: 180px;
+}
+/*放所有图片的盒子*/
+.slider-main{
+	position: relative;
+    width: 1100px;
+    height: 180px;
+}
+/*真正滑动的图片*/
+.slider-main-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 520px;
+    height: 180px;
+}
+.slider-main-img img {
+    width: 120px;
+    height: 180px;
+}
+.slider-ctrl {
+    text-align: center;
+    height: 24px;
+}
+.slider-ctrl-con {
+    width: 24px;
+    height: 20px;
+    display:inline-block;
+    background:url(../img/icon.png) no-repeat -24px -782px;
+    margin: 0 5px;
+    cursor: pointer;
+    text-indent: -20em;
+    overflow: hidden;
+}
+.current {
+    background-position: -24px -762px;
+}
+.slider-ctrl-prev,
+.slider-ctrl-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    background:url(../img/icon.png) no-repeat 6px top;
+    width: 30px;
+    height: 40px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+.slider-ctrl-prev {
+    left: 0;
+}
+.slider-ctrl-next {
+	right: 0;
+    background-position: -6px -44px;
+}
+.ico{
+	width: 28px;
+	height: 28px;
+	margin: 10px;
+}
+.goodbook{
+	position: absolute;
+	height: 23px;
+	line-height: 45px;
+	top: 0;
+	left: 0;
+	font-weight: bold;
+	text-align: center;
+	background-color: white;
+	cursor: pointer;
+	color: red;
+}
+.goodbook:hover{
+	color: yellow;
+}
+.rank{
+	float: left;
+	padding-top: 20px;
+	padding-left: 10px;
+	background-color: white;
+	margin-top: 20px;
+	cursor: pointer;
+	width: 580px;
+	height: 290px;
+}
+.rank .bookrank{
+	padding: 10px;
+}
+.rank .bookrank li{
+	border-bottom: 1px dotted black;
+	padding-bottom: 5px;
+	overflow: hidden;
+	height: 30px;
+	line-height: 30px;
+}
+.rank .bookrank span:hover{
+	color: yellow;
+}
+.rank .bookrank span{
+	display: inline-block;
+	float: left;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+}
+.rankone{width: 50px;}
+.ranktwo{width: 400px;}
+.rankthr{width: 100px;}
+.twoline{
+	margin-top: 40px;
+}
+.tioc{
+	width: 100%;
+	overflow: hidden;
+	margin: 15px 15px;
+}
+.tioc li{
+	float: left;
+	width: 90px;
+	height: 90px;
+	cursor: pointer;
+	margin-right: 12px;
+	border: 1px solid #CCCCCC;
+}
+.tioc li img{
+	width: 90px;
+	height: 90px;
+}
+.tioc li:hover{
+	border: 1px solid #A51C30;
+}
+.btnLine{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+}
+.auto{
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+	font-weight: bolder;
+}

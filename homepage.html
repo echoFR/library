@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/homeCSS.css"/>
+	</head>
+	<body>
+		<script src="js/animate.js" type="text/javascript"></script>
+	    <script src="js/home.js" type="text/javascript"></script>
+		<!--弹出层div-->
+		<div class="updiv" id="upDiv" style="display: none;">
+			<div class="upcontent">
+				<div id="close">
+					<img src="img/close.png" width="35px"/>
+				</div>
+				<div class="form">
+						Username:<input type="text" name="username" id="username" />
+						password:<input type="password" name="password" id="password"/>
+						<button id="loginBtn">Login</button>
+				</div>
+			</div>
+		</div>
+		<!--头部-->
+		<div class="header">
+			<!--logo图片-->
+			<div class="logo">
+				<img src="img/01.jpg" class="logoOne"/>
+				<img src="img/02.png" class="logoTwo"/>
+			</div>
+			<!--联系我们 登录-->
+			<ul class="navtop" id="navTop">
+				<li>☺&nbsp;登录</li>
+				<li>✉&nbsp;联系我们</li>
+				<li>☞&nbsp;旧馆链接</li>
+			</ul>
+			<div id="callPic" style="display: none;">
+				<span>
+					<img src="img/wechat.jpg" />&nbsp;微信
+				</span>
+				<span><img src="img/weibo.jpg" />&nbsp;微博</span>
+				<span><img src="img/qq.jpg" />&nbsp;QQ</span>
+				<span><img src="img/phone.png" />&nbsp;手机</span>
+			</div>		
+			<script>
+				var loginBtn=document.getElementById("loginBtn");
+				var username=document.getElementById("username");
+				var password=document.getElementById("password");
+				var passback="";
+				function tologin(data){
+					var result=data.Result;
+					var detail=data.Detail;
+					passback=detail.split(";")[0];
+					passback=passback+";%20";
+					passback=passback+detail.split(" ")[1];
+					if(result==true){
+						window.location.href="ownInform.html?session="+passback;
+					}
+					else{
+						alert("用户名或者密码错误，请重新输入！");
+					}
+				}
+				loginBtn.onclick=function(){
+					if(username.value==''){
+						alert('用户名不能为空！');
+					}
+					else{
+						if(password.value==''){
+							alert('密码不能为空！');
+						}
+						else{
+							var para="?username="+username.value+"&password="+password.value;
+					var scriptone=document.createElement("script");
+					scriptone.src="https://api.xiyoumobile.com/xiyoulibv2/user/login"+para+"&callback=tologin";
+					document.getElementsByTagName("head")[0].appendChild(scriptone);		
+						}
+					}
+				}
+			</script>
+			<!--标题导航-->
+			<div class="navbtm" id="list">
+				<ul>
+					<li>本馆概述
+						<ul>
+							<li>本馆简介</li>
+							<li>机构设置</li>
+							<li>部门领导</li>
+							<li>岗位职责</li>
+							<li>馆内新闻</li>
+						</ul>
+					</li>
+					<li>读者指南
+						<ul>
+							<li>本馆简介</li>
+							<li>机构设置</li>
+							<li>部门领导</li>
+							<li>岗位职责</li>
+							<li>馆内新闻</li>
+						</ul>
+					</li>
+					<li>电子资源
+						<ul>
+							<li>本馆简介</li>
+							<li>机构设置</li>
+							<li>部门领导</li>
+							<li>岗位职责</li>
+							<li>馆内新闻</li>
+						</ul>
+					</li>
+					<li>公共检索
+						<ul>
+							<li>本馆简介</li>
+							<li>机构设置</li>
+							<li>部门领导</li>
+							<li>岗位职责</li>
+							<li>馆内新闻</li>
+						</ul>
+					</li>
+					<li>参考咨询
+						<ul>
+							<li>本馆简介</li>
+							<li>机构设置</li>
+							<li>部门领导</li>
+							<li>岗位职责</li>
+							<li>馆内新闻</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--头部完-->
+		<!--内容-->
+		<div class="content">
+			<!--第一行-->
+			<div class="oneline">
+			<!--新闻和公告-->
+				<div class="news" id="news">
+				    <div class="newst">
+				        <span class="current">新闻</span>
+				        <span>公告</span>
+				    </div>
+				    <div class="newsb" id="newsB">
+			    		<ul class="show">
+			    			<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+			            	<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+			    		</ul>
+			            <ul>
+			    			<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+							<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+		            		<li></li>
+			            </ul>
+				    </div>
+					<div class="more">
+						<img src="img/more.png" />
+					</div>
+				</div>	
+		    	<!--为新闻和公告添加内容-->
+		    	<script type="text/javascript">
+					var scriptOne = document.createElement("script");//为新闻模块添加内容
+					var scriptTwo = document.createElement("script");//为新闻模块添加内容
+					scriptOne.src ="https://api.xiyoumobile.com/xiyoulibv2/news/getList/news/1?callback=newsInner";
+					scriptTwo.src ="https://api.xiyoumobile.com/xiyoulibv2/news/getList/announce/1?callback=annInner";
+					document.getElementsByTagName("head")[0].appendChild(scriptOne);
+					document.getElementsByTagName("head")[0].appendChild(scriptTwo);
+					function newsInner(data){
+						var inner="";
+						var allData=data.Detail.Data;
+						//新闻和公告
+						var newsB=document.getElementById("newsB");
+						var news=newsB.children[0];//新闻ul
+						var lis=news.getElementsByTagName("li");//新闻li
+						for (var i=0;i<lis.length;i++){
+							inner="<span class='arrow'>></span>";
+							inner+=allData[i].Title;
+							inner+="<span>"+allData[i].Date+"</span>";
+							lis[i].innerHTML=inner;
+						}
+					}
+					function annInner(data){
+						var inner="";
+						var allData=data.Detail.Data;
+						//新闻和公告
+						var newsB=document.getElementById("newsB");
+						var announce=newsB.children[1];//新闻ul
+						var lis=announce.getElementsByTagName("li");//新闻li
+						for (var i=0;i<lis.length;i++){
+							inner="<span class='arrow'>></span>";
+							inner+=allData[i].Title;
+							inner+="<span>"+allData[i].Date+"</span>";
+							lis[i].innerHTML=inner;
+						}
+					}
+				</script>
+				<!--新闻和公告完-->
+				<!--好书推荐轮播图-->
+				<div class="w-slider" id="js_slider">
+				    <div class="slider">
+				        <div class="slider-main" id="slider_main_block">
+				            <div class="slider-main-img">
+				            	<a href="#">
+				            		<img src="img/jie.jpg" alt=""/>
+				            		<img src="img/shou.jpg" alt=""/>
+				            		<img src="img/time.jpg" alt=""/>
+				            		<img src="img/寂静的春天.jpg" alt=""/>
+				            	</a>
+				            </div>
+				            <div class="slider-main-img">
+				            	<a href="#">
+				            		<img src="img/时间简史.jpg" alt=""/>
+				            		<img src="img/从一到无穷大.jpg" alt=""/>
+				            		<img src="img/昆虫记 .jpg" alt=""/>
+				            		<img src="img/算法导论.jpg" alt=""/>
+				            	</a>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="slider-ctrl" id="slider_ctrl">
+				        <span class="slider-ctrl-prev"></span>
+				        <span class="slider-ctrl-next"></span>
+				    </div>
+				    <div class="goodbook">
+				    	<img src="img/goodbook.png" class="ico"/>
+				    	好书推荐
+				    </div>
+				    <!--好书推荐轮播图-->
+				</div>
+				<div class="rank">
+					借阅排行榜
+					<ul class="bookrank" id="bookRank">
+						<li><span class="rankone">排行</span><span class="ranktwo">书名</span><span class="rankthr">借阅次数</span></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<script type="text/javascript">
+						var bookRank=document.getElementById("bookRank");//ul
+						var lis=bookRank.getElementsByTagName("li");//lis
+						var inner="";
+						var script = document.createElement("script");
+						script.src ="https://api.xiyoumobile.com/xiyoulibv2/book/rank?type=1&callback=abc";
+						document.getElementsByTagName("head")[0].appendChild(script);
+						function abc(data){
+							var detail=data.Detail;
+							for (var i=1;i<lis.length;i++) {
+								inner="<span class='rankone'>";
+								inner+=detail[i-1].Rank+"</span><span class='ranktwo'>"+detail[i-1].Title+"</span><span class='rankthr'>"+detail[i-1].BorNum+"</span>";
+								lis[i].innerHTML=inner;
+							}
+						}
+					</script>
+				</div>
+			</div>	
+			<div class="twoline">
+				<ul class="tioc">
+					<li><img src="img/1.png"></li>
+					<li><img src="img/2.png"></li>
+					<li><img src="img/3.png"></li>
+					<li><img src="img/4.png"></li>
+					<li><img src="img/5.png"></li>
+					<li><img src="img/6.png"></li>
+					<li><img src="img/7.png"></li>
+					<li><img src="img/8.png"></li>
+					<li><img src="img/9.png"></li>
+					<li><img src="img/10.png"></li>
+					<li><img src="img/11.png"></li>
+					<li><img src="img/12.png"></li>
+				</ul>
+			</div>
+			<div class="btnLine">
+				<div class="auto">Copyright ©：西邮移动开发实验室-Web组-冯嵘</div>
+			</div>
+		</div>
+		<!--内容完-->
+	</body>
+
+</html>

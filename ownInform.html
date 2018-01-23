@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link rel="stylesheet" type="text/css" href="css/owncss.css"/>
+</head>
+<!--window.location.href="test.html?num=10"  地址会改变参数也会被传递但是不会打开新窗口-->
+<!--js默认的属性：  var url = location.search;--> 
+<!--其中的location.search 就是js自动获取url中？ 后的所有值-->
+<!--获取了这个之后就可以使用substring，split等来获取参数了-->
+<body>
+    <script>
+    	var passback="";//回传
+    	var passurl="";
+    	var url = location.search;//传过来url  ？后面的所有内容
+    	var splitUrl=url.split("=");//分割url
+		passback=splitUrl[1]+"="+splitUrl[2]+"="+splitUrl[3];//获得回话参数	
+    </script>
+    <!--头部-->
+    <div class="header">
+    	<img src="img/hel2.png" class="hel"/>
+    	<span>欢迎进入您的个人图书馆</span>
+    	<div class="head-right">
+    		<span>返回主页</span>
+    		<span>退出登录</span>
+    	</div>
+    </div>
+    <!--内容-->
+    <div class="content">
+    	<!--选项卡-->
+    	<div class="conleft">
+    		<ul class="leftinfo" id="leftInfo">
+    			<li class="now"><img src="img/in08.png">个人信息</li>
+    			<li><img src="img/in03.png">借阅历史></li>
+    			<li><img src="img/in06.png">当前借阅与图书续借</li>
+    			<li><img src="img/in1.png">图书收藏</li>
+    			<li><img src="img/in02.png">修改密码</li>
+    			<li><img src="img/in05.png">搜索</li>
+    		</ul>
+    	</div>
+    	<!--内容-->
+    	<div class="conright">
+    		<ul class="rightinfo" id="rightInfo">
+    			<!--个人信息-->
+    			<li class="show">
+    				<div class="infospan" id="infoSpan">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+    				</div>
+    			</li>
+    			<script>
+    				var infoSpan=document.getElementById("infoSpan");
+    				var ispans=infoSpan.getElementsByTagName("span");
+    				var script1=document.createElement("script");  
+					script1.src="https://api.xiyoumobile.com/xiyoulibv2/user/info?session="+passback+"&callback=userInfo";
+    				document.getElementsByTagName("head")[0].appendChild(script1);
+    				function userInfo(data){
+    					var detail=data.Detail;
+    					ispans[0].innerHTML="<img src='img/name.png' class='infoIco'>姓名："+detail.Name;
+    					ispans[1].innerHTML="<img src='img/num.png' class='infoIco'>学号："+detail.ID;
+    					ispans[2].innerHTML="<img src='img/zhuan.png' class='infoIco'>专业："+detail.Department;
+    					ispans[3].innerHTML="<img src='img/kai.png' class='infoIco'>入校时间："+detail.From;
+    					ispans[4].innerHTML="<img src='img/jie.png' class='infoIco'>毕业时间："+detail.To;
+    					ispans[5].innerHTML="<img src='img/xueli.png' class='infoIco'>学历："+detail.ReaderType;
+    					ispans[6].innerHTML="<img src='img/money.png' class='infoIco'>欠费金额："+detail.Debt;
+    				}
+    			</script>
+    			<!--历史借阅-->
+    			<li>
+    				<div class="lendspan">
+    					<span class="lsone">当前最多显示6条记录：</span>
+    					<span class="lstwo">查看更多</span>
+    				</div>
+    				<div class="lendhis" id="lendHis">
+    				</div>
+    			</li>
+    			<script>
+    				var lendHis=document.getElementById("lendHis");
+    				var script2=document.createElement("script");  
+					script2.src="https://api.xiyoumobile.com/xiyoulibv2/user/history?session="+passback+"&callback=history";
+    				document.getElementsByTagName("head")[0].appendChild(script2);
+    				function history(data){
+    					var detail=data.Detail;
+    					if(detail!="NO_RECORD"){
+    						if(detail.length<6){
+								for (var i=0;i<detail.length;i++) {
+	    						var newdivInner="<span>书名：";
+	    						newdivInner+=detail[i].Title+"</span><span>操作类型："+detail[i].Type+"</span><span>"+detail[i].Type+"时间："+detail[i].Date+"</span>";
+	    						var newDiv=document.createElement("div");
+	    						newDiv.innerHTML=newdivInner;
+	    						newDiv.className="lendbook";
+	    						lendHis.appendChild(newDiv);
+		    					}
+							}
+    						else{
+    							for (var i=0;i<6;i++) {
+	    						var newdivInner="<span>书名：";
+	    						newdivInner+=detail[i].Title+"</span><span>操作类型："+detail[i].Type+"</span><span>"+detail[i].Type+"时间："+detail[i].Date+"</span>";
+	    						var newDiv=document.createElement("div");
+	    						newDiv.innerHTML=newdivInner;
+	    						newDiv.className="lendbook";
+	    						lendHis.appendChild(newDiv);
+		    					}
+    						}
+    					}
+    					else{
+    						lendHis.innerHTML="不好好学习,都木有借过书！";
+    					}
+    				}
+    			</script>
+    			<!--当前借阅与图书续借-->
+    			<li>
+    				<div class="nowlend" id="nowLend">
+    				</div>
+    			</li>
+    			<script>
+    				function nowbook(data){//当前借阅
+    					var arr=[];
+    					var detail=data.Detail;
+    					console.log(detail);
+    					var nowLend=document.getElementById("nowLend");
+    					var rebtns=nowLend.getElementsByTagName("button");//我要续借按钮
+    					for (var i=0;i<detail.length;i++) {
+    						date=detail[i].Date;
+    						date=date.slice(0,4)+"-"+date.slice(4,6)+"-"+date.slice(6);
+    						bookInner="<span>书名："+detail[i].Title+"</span>"+"<span>应还日期："+date;
+    						if(detail[i].State=="过期暂停"){
+    							bookInner+="</span><span>当前状态："+detail[i].State+"</span>";
+    						}
+    						else{
+    							var obj={};
+    							bookInner+="<button class='rebtn'>我要续借</button>";
+    							obj.departId=detail[i].Department_id;
+    							obj.libId=detail[i].Library_id;
+    							obj.barcode=detail[i].Barcode;
+    							arr.push(obj);
+    						}
+    						newDiv=document.createElement("div");
+    						newDiv.innerHTML=bookInner;
+    						newDiv.className="nowlenddiv";
+    						nowLend.appendChild(newDiv);
+    					}
+    					for (var j=0;j<rebtns.length;j++){
+    						rebtns[j].index=j;
+    						rebtns[j].onclick=function(){
+//  							bookInner+="</span><span>当前状态："+detail[i].State+"</span>";变;
+    							var k=this.index;
+								var para="&barcode="+arr[k].barcode+"&department_id="+arr[k].departId+"&library_id="+arr[k].libId;
+								var script4=document.createElement("script");
+    							//续借图书   script 的src
+								script4.src="https://api.xiyoumobile.com/xiyoulibv2/user/renew?session="+passback+para+"&callback=nextrebook";
+    							document.getElementsByTagName("head")[0].appendChild(script4);
+    						}
+    					}
+    				}
+    				function nextrebook(data){
+    					location.reload();
+    					console.log(data);
+    				}
+    			</script>
+    			<script>
+    				//当前图书
+    				var script3=document.createElement("script");  
+					script3.src="https://api.xiyoumobile.com/xiyoulibv2/user/rent?session="+passback+"&callback=nowbook";
+    				document.getElementsByTagName("head")[0].appendChild(script3);
+    			</script>
+    			<!--图书收藏-->
+    			<li>
+    				<div class="collection" id="collectBook">
+    				</div>
+    			</li>
+    			<script>
+    				function collect(data){
+    					var collectBook=document.getElementById("collectBook");
+    					var collectInner="<span>书名：";
+    					var detail=data.Detail;
+    					if(detail=="NO_RECORD"){		//当没有图书收藏时
+							collectBook.innerHTML="<div class='noco'>你没有收藏任何书哦！</div>";
+      					}
+    					else{
+    						for(var i=0;i<detail.length;i++){
+    							var newdiv=document.createElement("div");
+    							collectInner+=detail[i].Title+"</span><span>作者："+detail[i].Author+"</span><span>出版社："+detail[i].Pub+"</span>";
+    							newdiv.innerHTML=collectInner;
+    							collectBook.appendChild(newdiv);
+    						}
+    					}
+    				}
+    				var script5=document.createElement("script");  
+					script5.src="https://api.xiyoumobile.com/xiyoulibv2/user/favorite?session="+passback+"&callback=collect";//图书收藏
+    				document.getElementsByTagName("head")[0].appendChild(script5);
+    			</script>
+    			<li>
+    				<!--修改密码-->
+    				<div class="changepw" id="changePw">
+    					用户名：<input type="text" id="changeUs"/><br>
+    					当前密码：<input type="password" id="oldPw"/><br>
+    					新密码：<input type="password" id="onePw"/><br>
+    					确认新密码：<input type="password" id="twoPw"/><br>
+    					<button id="subPw">修改密码</button>
+    				</div>
+    			</li>
+    			<script>
+					var changeUs=document.getElementById("changeUs");//用户名
+					var oldPw=document.getElementById("oldPw");//当前密码
+					var onePw=document.getElementById("onePw");//新密码
+					var twoPw=document.getElementById("twoPw");//确认新密码
+					var subPw=document.getElementById("subPw");//提交按钮
+					function changepw(data){
+						var detail=data.Detail;
+						console.log(detail);
+						if(detail=="MODIFY_SUCCEED"){
+							alert("密码修改成功!");
+						}
+						else if(detail=="INVALID_PASSWORD"){
+							alert("旧密码不正确或用户名不正确!");
+						}
+						else if(detail=="DIFFERENT_PASSWORD"){
+							alert("两次输入的新密码不一样!");
+						}
+						else{
+							alert("输入有误，请重新输入!");
+						}
+					}
+					subPw.onclick=function(){
+						if(confirm("你确定修改密码吗？")){//确定修改密码
+							var pwPara="&username="+changeUs.value+"&password="+oldPw.value+"&newpassword="+onePw.value+"&repassword="+twoPw.value;
+							var script6=document.createElement("script");
+							script6.src="https://api.xiyoumobile.com/xiyoulibv2/user/modifyPassword?session="+passback+pwPara+"&callback=changepw";
+							document.getElementsByTagName("head")[0].appendChild(script6);
+						}
+					}
+    			</script>
+    			<li>
+    				<div class="search">
+    					<div class="searchtop">
+	    					<span>搜索图书</span>
+    						<div class="sbook">
+    							<input type="text" id="searchbox" />
+		    					<button id="searchbtn">搜索</button>
+    						</div>
+	    				</div>
+	    				<div class="searchbu" id="searchBu">
+	    					<ul id="searchul">
+	    					</ul>
+	    				</div>
+    				</div>
+    				<!--搜索-->
+    				<script>
+    					var searchbox=document.getElementById("searchbox");
+    					var searchbtn=document.getElementById("searchbtn");
+    					var searchul=document.getElementById("searchul");
+    					var ulinner="";
+    					function searchbook(data){
+    						var detail=data.Detail;
+    						var bookData=detail.BookData;
+    						for (var i=0;i<8;i++) {
+    							ulinner+="<li>书名:"+bookData[i].Title+"</li>"
+    							searchul.innerHTML=ulinner;
+    						}
+    					}
+    					//搜索
+    					searchbtn.onclick=function(){
+    						var script7=document.createElement("script");
+    						var para=searchbox.value;
+ 							script7.src="https://api.xiyoumobile.com/xiyoulibv2/book/search?keyword="+para+"&callback=searchbook";
+    						document.getElementsByTagName("head")[0].appendChild(script7);
+    					}
+    				</script>
+    			</li>
+    			
+    		</ul>
+    	</div>
+    	<script>
+    		var leftInfo=document.getElementById("leftInfo");
+    		var rightInfo=document.getElementById("rightInfo");
+    		var leftLis=leftInfo.getElementsByTagName("li");
+    		var rightLis=rightInfo.getElementsByTagName("li");
+    		for (var i=0;i<leftLis.length;i++) {
+    			leftLis[i].index=i;
+    			leftLis[i].onclick=function(){
+    				for (var k=0;k<leftLis.length;k++) {
+    					leftLis[k].className="";
+    					rightLis[leftLis[k].index].className="";
+    				}
+    				this.className="now";
+    				rightLis[this.index].className="show";
+    			}
+    		}
+    	</script>
+    </div>
+</body>
+</html>

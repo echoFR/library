@@ -1,0 +1,222 @@
+*{margin: 0;padding: 0;}
+ul,ol{text-decoration: none;}
+li{list-style: none;}
+a{text-decoration: none;}
+button{cursor: pointer;}
+img {
+	vertical-align: top;
+}
+body{
+	background-image: url(../img/ts.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.header{
+	width: 1280px;
+	margin: 0 auto;
+	overflow: hidden;
+	height: 100px;
+	line-height: 40px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: rgba(255,255,255,0.6);
+	margin-bottom: 20px;
+}
+.hel{
+	width: 40px;
+	height: 40px;
+	margin: 25px;
+}
+.header span{
+	line-height: 40px;
+	display: inline-block;
+	height: 40px;
+	margin: 25px;
+	font-weight: bold;
+}
+.head-right{
+	float: right;
+	cursor: pointer;
+}
+.head-right span:hover{
+	color: red;
+}
+.content{
+	width: 1280px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.conleft{
+	width: 270px;
+	float: left;
+	border-left: 1px solid black;
+	background-color: rgba(0,0,0,0.4);
+}
+.leftinfo{
+	width: 100%;
+}
+.leftinfo li{
+	cursor: pointer;
+	height: 75px;
+	line-height: 75px;
+	padding-left: 20px;
+	color: #ccc;
+	font-size: 18px;
+	border-bottom: 1px solid black;
+}
+.leftinfo li.now{
+	color: yellow;
+}
+.leftinfo img{
+	width: 40px;
+	height: 40px;	
+	margin-top: 13px;
+	margin-right: 10px;
+}
+.conright{
+	float: right;
+	width: 1000px;/*1070*/
+	height: 1200px;
+}
+.rightinfo{
+	width: 100%;
+}
+.rightinfo li{
+	padding-left: 20px;
+	width: 100%;
+	display: none;
+}
+.rightinfo li.show{
+	display: block;
+}
+.infoIco{
+	width: 36px;
+	margin:9px;
+	height: 28px;
+	margin-right: 14px;
+}
+.infospan{
+	padding: 10px;
+}
+.infospan span{
+	display: block;
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px solid black;
+}
+.lendhis{
+	padding: 5px;
+}
+.lendspan{
+	overflow: hidden;
+	cursor: pointer;
+}
+.lendspan span{
+	display: inline-block;
+	font-weight: bold;
+}
+.lendspan span:hover{
+	color: red;
+}
+.lsone{
+	float: left;
+}
+.lstwo{
+	float: right;
+	margin-right: 60px;
+}
+.lendbook{
+	border-bottom: 1px solid black;
+}
+.lendhis div,.nowlend div,.collection div{
+	width: 100%;
+	padding: 22px;
+}
+.lendhis div span,.nowlend div span,.collection div span{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+}
+.rebtn{
+	color: darkgreen;
+	width: 60px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	margin-left: 90px;
+}
+.changepw{
+	width: 920px;
+	padding: 20px;
+	margin-top: 15px;
+	border: 1px solid black;
+}
+.changepw input{
+	width: 300px;
+	height: 34px;
+	margin-bottom: 25px;
+	font-size: 20px;
+	padding: 2px;
+	outline: none;
+	margin-left: 15px;
+	border: none;
+}
+#subPw{
+	width: 90px;
+	height: 40px;
+	text-align: center;
+	outline: none;
+}
+.search{
+	padding: 20px;
+}
+.searchtop{
+	margin-bottom: 40px;
+	width: 100%;
+}
+.searchtop span{
+	display: block;
+	font-size: 20px;
+	font-weight: bolder;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+.searchtop div{
+	margin-top: 20px;
+}
+.sbook{
+	margin: 20px 0 20px 200px;
+}
+.sbook input{
+	width: 360px;
+	height: 50px;
+	font-size: 22px;
+	padding-left: 5px;
+	border-radius: 10px;
+	outline: none;
+	border: none;
+	margin-right: 10px;
+}
+.sbook button{
+	width: 80px;
+	height: 40px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+}
+.searchbu{
+	width: 100%;
+}
+.searchbu ul{
+	width: 100%;
+	padding: 20px;
+}
+.searchbu ul li{
+	display: block;
+	height: 70px;
+	line-height: 70px;
+	border-bottom: 1px solid black;
+}
+.nowlenddiv{
+	border-bottom: 1px solid black;
+}
